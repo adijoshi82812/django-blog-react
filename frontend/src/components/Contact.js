@@ -12,6 +12,14 @@ class Contact extends Component {
             email: "",
             message: ""
         };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     }
 
     render() {
@@ -44,6 +52,7 @@ class Contact extends Component {
                                         name="first_name"
                                         value={this.state.first_name}
                                         placeholder="Enter your first name"
+                                        onChange={this.handleChange}
                                         className="w3-input w3-border w3-round"
                                     />
 
@@ -53,9 +62,10 @@ class Contact extends Component {
 
                                     <input
                                         type="text"
-                                        name="first_name"
-                                        value={this.state.first_name}
-                                        placeholder="Enter your first name"
+                                        name="last_name"
+                                        value={this.state.last_name}
+                                        placeholder="Enter your last name"
+                                        onChange={this.handleChange}
                                         className="w3-input w3-border w3-round"
                                     />
 
@@ -64,10 +74,11 @@ class Contact extends Component {
                                 <div className="w3-third w3-padding">
 
                                     <input
-                                        type="text"
-                                        name="first_name"
-                                        value={this.state.first_name}
-                                        placeholder="Enter your first name"
+                                        type="email"
+                                        name="email"
+                                        value={this.state.email}
+                                        placeholder="Enter your Email"
+                                        onChange={this.handleChange}
                                         className="w3-input w3-border w3-round"
                                     />
 
@@ -81,6 +92,7 @@ class Contact extends Component {
                                     name="message"
                                     value={this.state.message}
                                     placeholder="Enter a message"
+                                    onChange={this.handleChange}
                                     className="w3-input w3-border w3-round w3-padding-24"
                                     style={{ resize: "none" }}
                                 />
