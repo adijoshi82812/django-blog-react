@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import Home from './Home';
+import About from './About';
 
 class Nav extends Component {
     state = {
@@ -66,7 +67,9 @@ class Nav extends Component {
 
                     <Route exact path={"/contact"}>Contact</Route>
 
-                    <Route exact path={"/about"}>About</Route>
+                    <Route exact path={"/about"}>
+                        <About/>
+                    </Route>
 
                     <Route path={"/"}>404 Error Page</Route>
 
