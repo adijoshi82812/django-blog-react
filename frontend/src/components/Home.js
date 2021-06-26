@@ -46,7 +46,7 @@ class Home extends Component {
 
                             <img src={"http://localhost:8000" + data.image} alt={data.image_alt} className="w3-image turn-top-20" />
 
-                            <h3 className="w3-center">{data.title}</h3>
+                            <p className="w3-center bold w3-padding">{data.title}</p>
 
                         </a>
 
