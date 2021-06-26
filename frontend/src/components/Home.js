@@ -34,17 +34,18 @@ class Home extends Component {
     render() {
         const recentPostComponent = this.state.recentPost.map(data => {
             return (
-                <div className="w3-row w3-padding" key={data.id}>
+                <a
+                    href={"/blog/" + data.slug}
+                    className="w3-white w3-third w3-card turn-20"
+                    style={{ textDecoration: "none" }}
+                    key={data.id}
+                >
 
-                    <a href={"/blog/" + data.slug} className="w3-white w3-third w3-card turn-20" style={{ textDecoration: "none" }}>
+                    <img src={"http://localhost:8000" + data.image} alt={data.image_alt} className="w3-image turn-top-20" />
 
-                        <img src={"http://localhost:8000" + data.image} alt={data.image_alt} className="w3-image turn-top-20" />
+                    <h3 className="w3-center">{data.title}</h3>
 
-                        <h3 className="w3-center">{data.title}</h3>
-
-                    </a>
-
-                </div>
+                </a>
             );
         });
 
@@ -94,7 +95,12 @@ class Home extends Component {
 
                     <h2>Recent Posts</h2>
 
-                    {recentPostComponent}
+
+                    <div className="w3-row w3-padding">
+                        
+                        {recentPostComponent}
+                    
+                    </div>
 
                 </div>
 
