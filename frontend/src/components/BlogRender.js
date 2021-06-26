@@ -53,7 +53,7 @@ class BlogRender extends Component {
 
                     <div className="w3-padding">
 
-                        <img src={"http://localhost:8000/media/static/fake_ad.jpg"} alt="ad image" className="w3-image w3-card" />
+                        <img src={"http://localhost:8000/media/static/fake_ad.jpg"} alt="ad" className="w3-image w3-card" />
 
                     </div>
 
