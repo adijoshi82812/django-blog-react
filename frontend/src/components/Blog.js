@@ -2,8 +2,43 @@ import React, { Component } from 'react';
 
 import img from '../static_post_6.jpg';
 
+import axios from 'axios';
+
 class Blog extends Component {
+    state = {
+        posts: []
+    }
+
+    componentDidMount() {
+        axios.get("http://localhost:8000/blogs/")
+            .then(res => this.setState({ posts: res.data }));
+    }
+
     render() {
+        const postsComponent = this.state.posts.map(data => {
+            return (
+                <div className="w3-padding w3-third" key={data.id}>
+
+                    <div className="w3-white turn-20">
+
+                        <a
+                            href={"/blog/" + data.slug}
+                            className="w3-card turn-20"
+                            style={{ textDecoration: "none" }}
+                        >
+
+                            <img src={"http://localhost:8000" + data.image} alt={data.image_alt} className="w3-image turn-top-20" />
+
+                            <p className="w3-center bold w3-padding">{data.title}</p>
+
+                        </a>
+
+                    </div>
+
+                </div>
+            );
+        });
+
         return (
             <div className="w3-animate-opacity">
 
@@ -22,13 +57,7 @@ class Blog extends Component {
 
                     <div className="w3-row w3-padding">
 
-                        <a href={"/blog/first-post"} className="w3-white w3-third w3-card turn-20" style={{ textDecoration: "none" }}>
-
-                            <img src={img} alt="static_post_6" className="w3-image turn-top-20" />
-
-                            <h3 className="w3-center">Static Post 6</h3>
-
-                        </a>
+                        {postsComponent}
 
                     </div>
                 </div>
