@@ -34,13 +34,14 @@ class Home extends Component {
     render() {
         const recentPostComponent = this.state.recentPost.map(data => {
             return (
-                <div className="w3-padding w3-third">
+                <div className="w3-padding w3-third" key={data.id}>
+
                     <div className="w3-white turn-20">
+
                         <a
                             href={"/blog/" + data.slug}
                             className="w3-card turn-20"
                             style={{ textDecoration: "none" }}
-                            key={data.id}
                         >
 
                             <img src={"http://localhost:8000" + data.image} alt={data.image_alt} className="w3-image turn-top-20" />
@@ -48,7 +49,9 @@ class Home extends Component {
                             <h3 className="w3-center">{data.title}</h3>
 
                         </a>
+
                     </div>
+
                 </div>
             );
         });
