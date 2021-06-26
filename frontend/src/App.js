@@ -1,32 +1,49 @@
 import React, { Component } from 'react';
 
+import { Route } from 'react-router-dom';
+
 import Nav from './components/Nav';
 import Footer from './components/Footer';
+import BlogRender from './components/BlogRender';
 
 import loading from './loading.gif';
 
-class App extends Component{
+import axios from 'axios';
+
+class App extends Component {
   state = {
-    loading: true
+    loading: true,
+    linksData: [],
   };
 
   setLoading = () => {
     this.setState({ loading: false });
   };
 
-  componentDidMount(){
-    setTimeout(this.setLoading, Math.floor(Math.random() * 1500 -1000) + 1000);
+  componentDidMount() {
+    axios.get('http://localhost:8000/blogs/')
+      .then(res => this.setState({ linksData: res.data }));
+
+    setTimeout(this.setLoading, Math.floor(Math.random() * 1500 - 1000) + 1000);
   }
 
-  render(){
-    if(this.state.loading){
-      return(
+  render() {
+    const links = this.state.linksData.map(data => {
+      return (
+        <Route exact path={"/blog/" + data.slug}>
+          <BlogRender />
+        </Route>
+      );
+    });
+
+    if (this.state.loading) {
+      return (
         <div className="w3-display-container" style={{ height: "100vh", width: "100vw" }}>
-          
+
           <div className="w3-display-middle">
-            
-            <img src={loading} alt="Loading"/>
-            <br/>
+
+            <img src={loading} alt="Loading" />
+            <br />
             Loading...
 
           </div>
@@ -34,10 +51,10 @@ class App extends Component{
       );
     }
 
-    return(
+    return (
       <div>
-        <Nav/>
-        <Footer/>
+        <Nav links={links}/>
+        <Footer />
       </div>
     );
   }
