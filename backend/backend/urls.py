@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    path('blogs/', include('blog.urls')),
     path('contact/', include('contact.urls')),
     path('daily_quotes/', include('dailyquote.urls')),
     path('admin/', admin.site.urls),
