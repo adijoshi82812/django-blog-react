@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'dailyquote.apps.DailyquoteConfig',
     'contact.apps.ContactConfig',
+    'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
