@@ -20,7 +20,7 @@ class BlogRender extends Component {
     render() {
         const blogDataComponent = this.state.blogData.map(data => {
             return (
-                <div className="w3-twothird w3-container" key={data.id}>
+                <div className="w3-threequarter w3-container" key={data.id}>
 
                     <header>
 
@@ -49,7 +49,7 @@ class BlogRender extends Component {
 
                 {blogDataComponent}
 
-                <div className="w3-third w3-container">
+                <div className="w3-quarter w3-container">
 
                     <div className="w3-padding">
 
