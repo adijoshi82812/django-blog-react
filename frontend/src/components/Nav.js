@@ -46,11 +46,11 @@ class Nav extends Component {
 
                 <div className={this.state.navShow ? showClassName : hideClassName}>
 
-                    <Link to={"/about"} className="w3-bar-item w3-button w3-hover-black" onClick={this.handleNavShow}>About</Link>
+                    <Link to={"/blog"} className="w3-bar-item w3-button w3-hover-black" onClick={this.handleNavShow}>Blog</Link>
 
                     <Link to={"/contact"} className="w3-bar-item w3-button w3-hover-black" onClick={this.handleNavShow}>Contact</Link>
 
-                    <Link to={"/blog"} className="w3-bar-item w3-button w3-hover-black" onClick={this.handleNavShow}>Blog</Link>
+                    <Link to={"/about"} className="w3-bar-item w3-button w3-hover-black" onClick={this.handleNavShow}>About</Link>
 
                 </div>
 
