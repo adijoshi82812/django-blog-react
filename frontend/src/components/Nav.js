@@ -7,6 +7,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import Home from './Home';
 import About from './About';
+import Contact from './Contact';
 
 class Nav extends Component {
     state = {
@@ -14,7 +15,7 @@ class Nav extends Component {
     };
 
     handleNavShow = () => {
-        if(this.state.navShow)
+        if (this.state.navShow)
             this.setState({ navShow: false });
         else
             this.setState({ navShow: true });
@@ -60,15 +61,17 @@ class Nav extends Component {
                 <Switch>
 
                     <Route exact path={"/"}>
-                        <Home/>
+                        <Home />
                     </Route>
 
                     <Route exact path={"/blog"}>Blog</Route>
 
-                    <Route exact path={"/contact"}>Contact</Route>
+                    <Route exact path={"/contact"}>
+                        <Contact />
+                    </Route>
 
                     <Route exact path={"/about"}>
-                        <About/>
+                        <About />
                     </Route>
 
                     <Route path={"/"}>404 Error Page</Route>
