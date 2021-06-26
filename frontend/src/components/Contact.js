@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
+import axios from 'axios';
+
 class Contact extends Component {
     constructor() {
         super();
@@ -21,6 +23,31 @@ class Contact extends Component {
             [e.target.name]: e.target.value
         });
     }
+
+    sendMessage = (data) => {
+        if(!data.first_name.length)
+            return alert("Enter your name");
+
+        if(!data.last_name.length)
+            return alert("Enter last name");
+
+        if(!data.email.length)
+            return alert("Email should not be empty");
+
+        if(!data.message.length)
+            return alert("Enter a message");
+
+        axios.post("http://localhost:8000/contact/", data)
+        .then(() => {
+            this.setState({
+                first_name: "",
+                last_name: "",
+                email: "",
+                message: ""
+            });
+            alert("Message Sent");
+        });
+    };
 
     render() {
         return (
@@ -101,7 +128,7 @@ class Contact extends Component {
 
                             <div className="w3-padding">
 
-                                <button type="button" className="w3-button w3-black w3-padding-large w3-round w3-right">
+                                <button type="button" onClick={() => this.sendMessage(this.state)} className="w3-button w3-black w3-padding-large w3-round w3-right">
                                     Send Message
                                     <FontAwesomeIcon icon={faPaperPlane} size="1x" className="w3-margin-left"/>
                                 </button>
