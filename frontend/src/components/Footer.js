@@ -55,6 +55,8 @@ export default function Footer() {
 
             </div>
 
+            <p className="w3-small w3-padding-large">&copy; Copyright Title</p>
+
         </div>
     );
 };
