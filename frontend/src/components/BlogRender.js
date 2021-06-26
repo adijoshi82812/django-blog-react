@@ -6,19 +6,23 @@ import img from '../static_post_6.jpg';
 
 class BlogRender extends Component {
     state = {
-        blogData: []
+        blogData: [],
+        recentPost: []
     };
 
     componentDidMount() {
         const slug = window.location.href.slice(27);
         axios.get("http://localhost:8000/blogs/" + slug)
             .then(res => this.setState({ blogData: res.data }));
+
+        axios.get("http://localhost:8000/blogs/recent_posts/")
+            .then(res => this.setState({ recentPost: res.data }));
     }
 
     render() {
         const blogDataComponent = this.state.blogData.map(data => {
             return (
-                <div className="w3-twothird w3-container">
+                <div className="w3-twothird w3-container" key={data.id}>
 
                     <header>
 
@@ -31,6 +35,14 @@ class BlogRender extends Component {
                     <p className="w3-justify">{data.content}</p>
 
                 </div>
+            );
+        });
+
+        const recentPostComponent = this.state.recentPost.map(data => {
+            return (
+                <li key={data.id}>
+                    <a href={"/blog/" + data.slug} className="w3-button w3-hover-white">{data.title}</a>
+                </li>
             );
         });
 
@@ -53,9 +65,7 @@ class BlogRender extends Component {
 
                         <ul className="w3-ul w3-border-top w3-round w3-hover">
 
-                            <li>
-                                <a href={"/blog/first-post"} className="w3-button w3-hover-white">First Post</a>
-                            </li>
+                            {recentPostComponent}
 
                         </ul>
 
