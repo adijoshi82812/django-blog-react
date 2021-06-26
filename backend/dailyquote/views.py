@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from .serializers import DailyQuoteSerializer
+from .models import DailyQuote
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
-# Create your views here.
+class DailyQuoteView(APIView):
+    def get(self, request):
+        show = DailyQuote.objects.order_by('-pub_date')[:1]
+        serializer = DailyQuoteSerializer(show, many=True)
+
+        return Response(serializer.data)
