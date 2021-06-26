@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import img from '../static_post_6.jpg';
-
 import axios from 'axios';
 
 class Blog extends Component {

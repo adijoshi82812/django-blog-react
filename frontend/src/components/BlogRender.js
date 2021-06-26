@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-import img from '../static_post_6.jpg';
-
 class BlogRender extends Component {
     state = {
         blogData: [],

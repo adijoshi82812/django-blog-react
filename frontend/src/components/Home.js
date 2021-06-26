@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 
-import img from '../static_post_6.jpg';
-
 import axios from 'axios';
 
 class Home extends Component {
