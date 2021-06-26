@@ -13,21 +13,41 @@ class Home extends Component {
         daily_quote: {
             quote: "",
             author: ""
-        }
+        },
+        recentPost: []
     };
 
-    componentDidMount(){
+    componentDidMount() {
         axios.get("http://localhost:8000/daily_quotes/")
-        .then(res => this.setState({ dailyQuoteData: res.data }))
-        .then(() => this.setState({
-            daily_quote: {
-                quote: this.state.dailyQuoteData[0].quote,
-                author: this.state.dailyQuoteData[0].author
-            }
-        }));
+            .then(res => this.setState({ dailyQuoteData: res.data }))
+            .then(() => this.setState({
+                daily_quote: {
+                    quote: this.state.dailyQuoteData[0].quote,
+                    author: this.state.dailyQuoteData[0].author
+                }
+            }));
+
+        axios.get("http://localhost:8000/blogs/recent_posts/")
+            .then(res => this.setState({ recentPost: res.data }));
     }
 
     render() {
+        const recentPostComponent = this.state.recentPost.map(data => {
+            return (
+                <div className="w3-row w3-padding" key={data.id}>
+
+                    <a href={"/blog/" + data.slug} className="w3-white w3-third w3-card turn-20" style={{ textDecoration: "none" }}>
+
+                        <img src={"http://localhost:8000" + data.image} alt={data.image_alt} className="w3-image turn-top-20" />
+
+                        <h3 className="w3-center">{data.title}</h3>
+
+                    </a>
+
+                </div>
+            );
+        });
+
         return (
             <div className="w3-animate-opacity">
 
@@ -74,17 +94,8 @@ class Home extends Component {
 
                     <h2>Recent Posts</h2>
 
-                    <div className="w3-row w3-padding">
+                    {recentPostComponent}
 
-                        <a href={"/blog/first-post"} className="w3-white w3-third w3-card turn-20" style={{ textDecoration: "none" }}>
-
-                            <img src={img} alt="static_post_6" className="w3-image turn-top-20" />
-
-                            <h3 className="w3-center">Static Post 6</h3>
-
-                        </a>
-
-                    </div>
                 </div>
 
             </div>
