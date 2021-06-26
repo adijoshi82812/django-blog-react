@@ -55,13 +55,13 @@ class Home extends Component {
 
                     <div className="w3-row w3-padding">
 
-                        <div className="w3-white w3-third w3-card turn-20">
+                        <a href={"/blog/first-post"} className="w3-white w3-third w3-card turn-20" style={{ textDecoration: "none" }}>
 
                             <img src={img} alt="static_post_6" className="w3-image turn-top-20" />
 
                             <h3 className="w3-center">Static Post 6</h3>
 
-                        </div>
+                        </a>
 
                     </div>
                 </div>
