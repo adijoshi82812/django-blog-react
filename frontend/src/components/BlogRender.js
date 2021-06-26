@@ -47,7 +47,7 @@ class BlogRender extends Component {
         });
 
         return (
-            <div className="w3-row w3-margin">
+            <div className="w3-row w3-margin w3-animate-opacity">
 
                 {blogDataComponent}
 
