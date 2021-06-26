@@ -9,6 +9,7 @@ import Home from './Home';
 import About from './About';
 import Contact from './Contact';
 import Blog from './Blog';
+import Page from './404Page';
 
 class Nav extends Component {
     state = {
@@ -77,7 +78,9 @@ class Nav extends Component {
                         <About />
                     </Route>
 
-                    <Route path={"/"}>404 Error Page</Route>
+                    <Route path={"/"}>
+                        <Page/>
+                    </Route>
 
                 </Switch>
 
