@@ -5,7 +5,28 @@ import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 
 import img from '../static_post_6.jpg';
 
+import axios from 'axios';
+
 class Home extends Component {
+    state = {
+        dailyQuoteData: [],
+        daily_quote: {
+            quote: "",
+            author: ""
+        }
+    };
+
+    componentDidMount(){
+        axios.get("http://localhost:8000/daily_quotes/")
+        .then(res => this.setState({ dailyQuoteData: res.data }))
+        .then(() => this.setState({
+            daily_quote: {
+                quote: this.state.dailyQuoteData[0].quote,
+                author: this.state.dailyQuoteData[0].author
+            }
+        }));
+    }
+
     render() {
         return (
             <div className="w3-animate-opacity">
@@ -41,9 +62,9 @@ class Home extends Component {
 
                         <FontAwesomeIcon icon={faQuoteLeft} size="1x" />
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>{this.state.daily_quote.quote}</p>
 
-                        <p className="w3-small">- Lorem</p>
+                        <p className="w3-small">{this.state.daily_quote.author}</p>
 
                     </div>
 
