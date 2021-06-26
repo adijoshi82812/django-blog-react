@@ -1,0 +1,12 @@
+.bold{
+    font-weight: bold;
+}
+.turn-20{
+    border-radius: 20px;
+}
+.turn-top-20{
+    border-radius: 20px 20px 0px 0px;
+}
+.turn-bottom-20{
+    border-radius: 0px 0px 20px 20px;
+}
