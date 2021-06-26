@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+import Home from './Home';
+
 class Nav extends Component {
     state = {
         navShow: false
@@ -56,7 +58,9 @@ class Nav extends Component {
 
                 <Switch>
 
-                    <Route exact path={"/"}>Home</Route>
+                    <Route exact path={"/"}>
+                        <Home/>
+                    </Route>
 
                     <Route exact path={"/blog"}>Blog</Route>
 
