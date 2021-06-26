@@ -8,6 +8,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import Home from './Home';
 import About from './About';
 import Contact from './Contact';
+import Blog from './Blog';
 
 class Nav extends Component {
     state = {
@@ -64,7 +65,9 @@ class Nav extends Component {
                         <Home />
                     </Route>
 
-                    <Route exact path={"/blog"}>Blog</Route>
+                    <Route exact path={"/blog"}>
+                        <Blog />
+                    </Route>
 
                     <Route exact path={"/contact"}>
                         <Contact />
