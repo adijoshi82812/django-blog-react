@@ -7,15 +7,15 @@ class Nav extends Component{
         return(
             <Router>
 
-                <nav>
+                <nav className="w3-bar w3-black w3-padding-small">
 
-                    <Link to={"/"}>Home</Link>
+                    <Link to={"/"} className="w3-bar-item w3-button w3-hover-black">Home</Link>
 
-                    <Link to={"/blog"}>Blog</Link>
+                    <Link to={"/about"} className="w3-bar-item w3-button w3-hover-black w3-right">About</Link>
 
-                    <Link to={"/contact"}>Contact</Link>
+                    <Link to={"/contact"} className="w3-bar-item w3-button w3-hover-black w3-right">Contact</Link>
 
-                    <Link to={"/about"}>About</Link>
+                    <Link to={"/blog"} className="w3-bar-item w3-button w3-hover-black w3-right">Blog</Link>
 
                 </nav>
 
