@@ -23,7 +23,7 @@ function Home() {
 
     useEffect(() => {
         async function fetchData() {
-            const res = await axios.get("/api/fetch-quote/");
+            const res = await axios.get("http://localhost:8000/api/fetch-quote/");
             return res;
         }
 
