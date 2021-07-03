@@ -1,56 +1,113 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default function About() {
-    return (
-        <div className="w3-animate-opacity">
+class About extends Component {
+    state = {
+        tab1show: false,
+        tab2show: false
+    };
 
-            <header className="w3-display-container w3-grey" style={{ height: "500px", width: "100%" }}>
+    render() {
+        const tab1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec odio laoreet, ultricies massa nec, faucibus neque. Cras ac fringilla ligula. Sed tempus enim nisi, non lacinia massa dapibus a. Donec sed leo ultricies, consectetur libero et, sodales nisi. Aenean venenatis leo sit amet viverra tempor. Morbi nulla quam, scelerisque id elit ac, blandit pharetra eros. Fusce faucibus malesuada quam blandit lobortis. Nullam tempor iaculis turpis, non convallis purus aliquam vitae. Nullam vitae metus mi. Cras vel justo hendrerit, mollis augue ac, elementum ante. Mauris placerat sem eleifend est hendrerit porta. Sed ut ante in lectus rutrum semper sit amet a dui.";
+        const tab2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec odio laoreet, ultricies massa nec, faucibus neque. Cras ac fringilla ligula. Sed tempus enim nisi, non lacinia massa dapibus a. Donec sed leo ultricies, consectetur libero et, sodales nisi. Aenean venenatis leo sit amet viverra tempor. Morbi nulla quam, scelerisque id elit ac, blandit pharetra eros. Fusce faucibus malesuada quam blandit lobortis. Nullam tempor iaculis turpis, non convallis purus aliquam vitae. Nullam vitae metus mi. Cras vel justo hendrerit, mollis augue ac, elementum ante. Mauris placerat sem eleifend est hendrerit porta. Sed ut ante in lectus rutrum semper sit amet a dui. Nunc sodales lacus tellus, quis dapibus dolor suscipit vitae. Integer interdum velit in magna efficitur, non sollicitudin ex interdum. Integer augue nisi, accumsan sed porta eu, vestibulum at leo. Fusce tristique iaculis nibh, ac tristique purus gravida volutpat. Vivamus eu ultricies metus, quis cursus ante. Nunc a dui rhoncus tortor vulputate fringilla ut non nulla. Vivamus ac sagittis lorem, in gravida urna.";
 
-                <h1 className="w3-display-middle w3-text-white bold">
-                    About Page
-                    <hr className="w3-black w3-padding-small w3-border-black" />
-                </h1>
+        const tab1small = tab1.slice(0, 500);
+        const tab2small = tab2.slice(0, 500);
 
-            </header>
+        return (
+            <div className="w3-animate-opacity">
 
-            <div className="w3-row">
+                <header className="color-2 w3-display-container" style={{ width: "100%", height: "500px" }}>
 
-                <div className="w3-padding w3-half">
+                    <h1 className="w3-display-middle heading">
+                        About Page
+                        <hr className="color-1 w3-padding-small color-1-border" />
+                    </h1>
 
-                    <div className="w3-card w3-padding w3-round">
+                </header>
 
-                        <h2 className="w3-center">Who am i?</h2>
+                <div className="w3-row">
 
-                        <p className="w3-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac odio a ipsum convallis rhoncus. Donec arcu enim, hendrerit eu euismod ut, lacinia nec orci. Donec nec libero a orci elementum varius. Donec sagittis justo quis lacus tincidunt tincidunt vitae sollicitudin purus. Sed rhoncus commodo blandit. Nam tempor odio at rhoncus dignissim. Nunc finibus nisl magna. Quisque in orci mollis, volutpat velit nec, tincidunt arcu. Aliquam vitae sodales ligula, nec malesuada sapien. Aenean quam magna, malesuada sit amet ligula at, pretium viverra ante. Vestibulum id neque vel tortor aliquet bibendum. Integer condimentum lectus ac nibh egestas vehicula. Mauris dui ipsum, placerat vel est et, vulputate lacinia erat.
+                    <div className="w3-half w3-padding">
 
-                            Maecenas at urna sapien. Aliquam lacinia mattis sollicitudin. Fusce malesuada libero pretium lectus tincidunt, sit amet placerat massa sagittis. Curabitur consequat tellus vel neque viverra, ac ornare elit vulputate. Sed sit amet ex sit amet turpis mollis iaculis vel a purus. Phasellus urna mi, pulvinar a porta id, congue ac diam. Aliquam eget mauris et nisi porta ullamcorper. Sed maximus rhoncus nisi, convallis consectetur dolor scelerisque in. Proin euismod, turpis eu placerat viverra, odio nibh pharetra diam, a varius orci est ac lacus. Aenean a ornare elit. Nulla facilisi.
-                        </p>
+                        <div className="w3-card-4 w3-padding color-3 turn-10">
+
+                            <h2 className="w3-center">Hello World</h2>
+
+                            <p className="w3-justify w3-hide-small">{tab1}</p>
+
+                            <p className="w3-justify w3-hide-large w3-hide-medium">
+                                {this.state.tab1show ? tab1 : tab1small}
+
+                                {this.state.tab1show ? (
+
+                                    <span
+                                        onClick={() => { this.setState({ tab1show: false }) }}
+                                        className="text-color-1 clickable"
+                                        style={{ textDecoration: "underline" }}
+                                    >
+                                        Read Less...
+                                    </span>
+
+                                ) : (
+
+                                    <span
+                                        onClick={() => { this.setState({ tab1show: true }) }}
+                                        className="text-color-1 clickable"
+                                        style={{ textDecoration: "underline" }}
+                                    >
+                                        Read More...
+                                    </span>
+
+                                )}
+                            </p>
+
+                        </div>
 
                     </div>
 
-                </div>
+                    <div className="w3-half w3-padding">
 
-                <div className="w3-padding w3-half">
+                        <div className="w3-card-4 w3-padding color-3 turn-10">
 
-                    <div className="w3-card w3-padding w3-round">
+                            <h2 className="w3-center">Hello World</h2>
 
-                        <h2 className="w3-center">What do i blog?</h2>
+                            <p className="w3-justify w3-hide-small">{tab2}</p>
 
-                        <p className="w3-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac odio a ipsum convallis rhoncus. Donec arcu enim, hendrerit eu euismod ut, lacinia nec orci. Donec nec libero a orci elementum varius. Donec sagittis justo quis lacus tincidunt tincidunt vitae sollicitudin purus. Sed rhoncus commodo blandit. Nam tempor odio at rhoncus dignissim. Nunc finibus nisl magna. Quisque in orci mollis, volutpat velit nec, tincidunt arcu. Aliquam vitae sodales ligula, nec malesuada sapien. Aenean quam magna, malesuada sit amet ligula at, pretium viverra ante. Vestibulum id neque vel tortor aliquet bibendum. Integer condimentum lectus ac nibh egestas vehicula. Mauris dui ipsum, placerat vel est et, vulputate lacinia erat.
+                            <p className="w3-justify w3-hide-large w3-hide-medium">
+                                {this.state.tab2show ? tab2 : tab2small}
 
-                            Maecenas at urna sapien. Aliquam lacinia mattis sollicitudin. Fusce malesuada libero pretium lectus tincidunt, sit amet placerat massa sagittis. Curabitur consequat tellus vel neque viverra, ac ornare elit vulputate. Sed sit amet ex sit amet turpis mollis iaculis vel a purus. Phasellus urna mi, pulvinar a porta id, congue ac diam. Aliquam eget mauris et nisi porta ullamcorper. Sed maximus rhoncus nisi, convallis consectetur dolor scelerisque in. Proin euismod, turpis eu placerat viverra, odio nibh pharetra diam, a varius orci est ac lacus. Aenean a ornare elit. Nulla facilisi.
+                                {this.state.tab2show ? (
 
-                            Donec justo leo, aliquet in consectetur sit amet, euismod ac ante. Mauris eu faucibus est. Sed ac sem lobortis, congue risus quis, euismod dolor. Pellentesque facilisis lobortis magna, pellentesque finibus orci finibus non. Nam quis bibendum felis, ac porta lectus. Proin vitae magna quis mi convallis dapibus id in nisi. In rhoncus rutrum tellus vitae molestie. Etiam ut interdum quam. Curabitur molestie quam dolor, vel venenatis dolor efficitur sed.
-                        </p>
+                                    <span
+                                        onClick={() => { this.setState({ tab2show: false }) }}
+                                        className="text-color-1 clickable"
+                                        style={{ textDecoration: "underline" }}
+                                    >
+                                        Read Less...
+                                    </span>
+
+                                ) : (
+
+                                    <span
+                                        onClick={() => { this.setState({ tab2show: true }) }}
+                                        className="text-color-1 clickable"
+                                        style={{ textDecoration: "underline" }}
+                                    >
+                                        Read More...
+                                    </span>
+
+                                )}
+                            </p>
+
+                        </div>
 
                     </div>
-                    
+
                 </div>
 
             </div>
+        );
+    }
+}
 
-        </div>
-    );
-};
+export default About;
