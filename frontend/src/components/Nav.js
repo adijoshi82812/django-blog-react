@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -13,50 +13,61 @@ import Page from './404Page';
 
 class Nav extends Component {
     state = {
-        navShow: false
+        smallNav: false
     };
 
-    handleNavShow = () => {
-        if (this.state.navShow)
-            this.setState({ navShow: false });
+    smallNavHandler = () => {
+        if (this.state.smallNav)
+            this.setState({ smallNav: false });
         else
-            this.setState({ navShow: true });
+            this.setState({ smallNav: true });
     };
 
     render() {
-        const showClassName = "w3-bar-block w3-padding-small w3-black w3-hide-large w3-hide-medium";
-        const hideClassName = "w3-hide";
+        const showNavClassName = this.state.smallNav ? "w3-show" : "w3-hide";
 
         return (
             <Router>
 
-                <nav className="w3-bar w3-black w3-padding-small">
+                <nav className="w3-bar color-1 heavy">
 
-                    <Link to={"/"} className="w3-bar-item w3-button w3-hover-black">Home</Link>
+                    <Link to={"/"} className="w3-bar-item w3-button color-1-hover">Home</Link>
 
-                    <div className="w3-hide-small">
+                    <button
+                        type="button"
+                        onClick={this.smallNavHandler}
+                        className="w3-bar-item w3-button w3-right w3-hide-large color-1-hover"
+                    >
 
-                        <Link to={"/about"} className="w3-bar-item w3-button w3-hover-black w3-right">About</Link>
+                        <FontAwesomeIcon icon={faBars} size="1x" />
 
-                        <Link to={"/contact"} className="w3-bar-item w3-button w3-hover-black w3-right">Contact</Link>
+                    </button>
 
-                        <Link to={"/blog"} className="w3-bar-item w3-button w3-hover-black w3-right">Blog</Link>
+                    <div className="w3-hide-small w3-hide-medium w3-right">
+
+                        <Link to={"/blog/"} className="w3-bar-item w3-button color-1-hover">Blog</Link>
+
+                        <Link to={"/contact/"} className="w3-bar-item w3-button color-1-hover">Contact</Link>
+
+                        <Link to={"/about/"} className="w3-bar-item w3-button color-1-hover">About</Link>
 
                     </div>
 
-                    <button type="button" className="w3-bar-item w3-button w3-hover-black w3-right w3-hide-large w3-hide-medium" onClick={this.handleNavShow}>
-                        <FontAwesomeIcon icon={faBars} size="1x" />
-                    </button>
-
                 </nav>
 
-                <div className={this.state.navShow ? showClassName : hideClassName}>
+                <div className={"w3-hide-large color-1 w3-bar-block w3-animate-opacity " + showNavClassName}>
 
-                    <Link to={"/blog"} className="w3-bar-item w3-button w3-hover-black" onClick={this.handleNavShow}>Blog</Link>
+                    <Link to={"/blog/"} onClick={this.smallNavHandler} className="w3-bar-item w3-button color-1-hover">
+                        Blog
+                    </Link>
 
-                    <Link to={"/contact"} className="w3-bar-item w3-button w3-hover-black" onClick={this.handleNavShow}>Contact</Link>
+                    <Link to={"/contact/"} onClick={this.smallNavHandler} className="w3-bar-item w3-button color-1-hover">
+                        Contact
+                    </Link>
 
-                    <Link to={"/about"} className="w3-bar-item w3-button w3-hover-black" onClick={this.handleNavShow}>About</Link>
+                    <Link to={"/about/"} onClick={this.smallNavHandler} className="w3-bar-item w3-button color-1-hover">
+                        About
+                    </Link>
 
                 </div>
 
@@ -66,18 +77,16 @@ class Nav extends Component {
                         <Home />
                     </Route>
 
-                    {this.props.links}
-
-                    <Route exact path={"/blog"}>
-                        <Blog />
+                    <Route exact path={"/about/"}>
+                        <About />
                     </Route>
 
-                    <Route exact path={"/contact"}>
+                    <Route exact path={"/contact/"}>
                         <Contact />
                     </Route>
 
-                    <Route exact path={"/about"}>
-                        <About />
+                    <Route path={"/blog/"}>
+                        <Blog />
                     </Route>
 
                     <Route path={"/"}>
