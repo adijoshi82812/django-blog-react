@@ -19,8 +19,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('blogs/', include('blog.urls')),
-    path('contact/', include('contact.urls')),
-    path('daily_quotes/', include('dailyquote.urls')),
+    path('api/blog/', include('blog.urls')),
+    path('api/contact-page/', include('contact.urls')),
+    path('api/fetch-quote/', include('dailyquote.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
