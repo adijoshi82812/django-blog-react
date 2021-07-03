@@ -1,79 +1,115 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useRouteMatch, useParams, Link, Switch, Route } from 'react-router-dom';
 
 import axios from 'axios';
 
-class BlogRender extends Component {
-    state = {
-        blogData: [],
-        recentPost: []
-    };
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
-    componentDidMount() {
-        const slug = window.location.href.slice(27);
-        axios.get("http://localhost:8000/blogs/" + slug)
-            .then(res => this.setState({ blogData: res.data }));
+import Loading from './Loading';
 
-        axios.get("http://localhost:8000/blogs/recent_posts/")
-            .then(res => this.setState({ recentPost: res.data }));
-    }
+function BlogRender() {
+    let { slug } = useParams();
 
-    render() {
-        const blogDataComponent = this.state.blogData.map(data => {
-            return (
-                <div className="w3-threequarter w3-container" key={data.id}>
+    let { path } = useRouteMatch();
 
-                    <header>
+    const [data, setdata] = useState([]);
+    const [recent, setrecent] = useState([]);
+    const [loading, setloading] = useState(true);
 
-                        <h1 className="w3-center">{data.title}</h1>
+    useEffect(() => {
+        setloading(true);
+        async function fetchdata() {
+            const res = await axios.get("http://localhost:8000/api/blog/posts/" + slug)
+            return res;
+        }
 
-                        <img src={"http://localhost:8000" + data.image} alt={data.image_alt} className="w3-image" />
+        return fetchdata().then(res => setdata(res.data), setloading(false));
+    }, [slug]);
 
-                    </header>
+    useEffect(() => {
+        setloading(true);
+        async function fetchData() {
+            const res = await axios.get("http://localhost:8000/api/blog/recent-posts/");
+            return res;
+        }
 
-                    <p className="w3-justify">{data.content}</p>
+        return fetchData().then(res => setrecent(res.data), setloading(false));
+    }, []);
+
+    const recentComponent = recent.map(data => {
+        return (
+            <li key={data.id}>
+
+                <Link to={`/blog/` + data.slug + '/'} style={{ textDecoration: "none" }}>{data.title}</Link>
+
+            </li>
+        );
+    });
+
+    const blogComponent = data.map(data => {
+        return (
+            <div className="w3-threequarter w3-padding" key={data.id}>
+
+                <header>
+
+                    <h1 className="w3-center">{data.title}</h1>
+
+                    <img src={data.image} alt={data.alt_text} className="w3-image turn-10" />
+
+                </header>
+
+                <h2 className="w3-padding">
+
+                    <FontAwesomeIcon icon={faCaretRight} size="1x" className="w3-margin-right" />
+                    {data.heading}
+
+                </h2>
+
+                <p className="w3-justify w3-padding color-3 turn-10">{data.content}</p>
+
+            </div>
+        );
+    });
+
+    const blogRenderComponent = (
+        <div className="w3-row w3-margin w3-animate-opacity">
+
+            {blogComponent}
+
+            <div className="w3-quarter">
+
+                <div className="w3-padding">
+
+                    <img src="/media/ad.png" alt="Ad" className="w3-image turn-10" />
 
                 </div>
-            );
-        });
 
-        const recentPostComponent = this.state.recentPost.map(data => {
-            return (
-                <li key={data.id}>
-                    <a href={"/blog/" + data.slug} className="w3-button w3-hover-white">{data.title}</a>
-                </li>
-            );
-        });
+                <div className="w3-padding">
 
-        return (
-            <div className="w3-row w3-margin w3-animate-opacity">
+                    <ul className="color-3 w3-ul turn-10">
 
-                {blogDataComponent}
+                        <li className="w3-large bold">Recent Posts</li>
 
-                <div className="w3-quarter w3-container">
+                        {recentComponent}
 
-                    <div className="w3-padding">
-
-                        <img src={"http://localhost:8000/media/static/fake_ad.jpg"} alt="ad" className="w3-image w3-card" />
-
-                    </div>
-
-                    <div className="w3-margin w3-card w3-padding">
-
-                        <p className="w3-large">Recent Posts</p>
-
-                        <ul className="w3-ul w3-border-top w3-round w3-hover">
-
-                            {recentPostComponent}
-
-                        </ul>
-
-                    </div>
+                    </ul>
 
                 </div>
 
             </div>
-        );
-    }
+
+        </div>
+    );
+
+    return (
+        <Switch>
+
+            <Route exact path={path}>{loading ? <Loading /> : blogRenderComponent}</Route>
+
+        </Switch>
+    );
 }
 
 export default BlogRender;
