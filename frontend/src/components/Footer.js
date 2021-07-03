@@ -1,62 +1,110 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faTelegram,
-    faGithub,
-    faLinkedin,
-    faInstagram
-} from '@fortawesome/free-brands-svg-icons';
+import { faChevronRight, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
-export default function Footer() {
-    return (
-        <div className="w3-black">
+class Footer extends Component {
+    render() {
+        return (
+            <footer className="color-1">
 
-            <div className="w3-row w3-padding-large">
+                <div className="w3-row">
 
-                <div className="w3-third w3-padding">
+                    <div className="w3-third w3-padding-large">
 
-                    <h3>Title</h3>
+                        <h5>
 
-                    <a href={"/blog"} style={{ textDecoration: "none" }}>Blog</a>
+                            <FontAwesomeIcon icon={faChevronRight} size="1x" />
+                            &nbsp;
+                            Joshi's Blog
 
-                </div>
+                        </h5>
 
-                <div className="w3-third w3-padding">
+                        <p>
 
-                    <h3>Contact</h3>
+                            <FontAwesomeIcon icon={faCaretRight} size="1x" />
+                            &nbsp;
+                            Blog
 
-                    <a href={"/contact"} style={{ textDecoration: "none" }}>Contact Me</a>
-
-                    <div>
-
-                        <p className="w3-small">Socials</p>
-
-                        <FontAwesomeIcon icon={faInstagram} size="2x" className="w3-margin" />
-
-                        <FontAwesomeIcon icon={faTelegram} size="2x" className="w3-margin" />
-
-                        <FontAwesomeIcon icon={faGithub} size="2x" className="w3-margin" />
-
-                        <FontAwesomeIcon icon={faLinkedin} size="2x" className="w3-margin" />
+                        </p>
 
                     </div>
+
+                    <div className="w3-third w3-padding-large">
+
+                        <h5>
+
+                            <FontAwesomeIcon icon={faChevronRight} size="1x" />
+                            &nbsp;
+                            Contact
+
+                        </h5>
+
+                        <p>
+
+                            <FontAwesomeIcon icon={faCaretRight} size="1x" />
+                            &nbsp;
+                            Email
+
+                        </p>
+
+                        <p>
+
+                            <FontAwesomeIcon icon={faCaretRight} size="1x" />
+                            &nbsp;
+                            Facebook
+
+                        </p>
+
+                        <p>
+
+                            <FontAwesomeIcon icon={faCaretRight} size="1x" />
+                            &nbsp;
+                            Instagram
+
+                        </p>
+
+                    </div>
+
+                    <div className="w3-third w3-padding-large">
+
+                        <h5>
+
+                            <FontAwesomeIcon icon={faChevronRight} size="1x" />
+                            &nbsp;
+                            About
+
+                        </h5>
+
+                        <p>
+
+                            <FontAwesomeIcon icon={faCaretRight} size="1x" />
+                            &nbsp;
+                            About me
+
+                        </p>
+
+                        <p>
+
+                            <FontAwesomeIcon icon={faCaretRight} size="1x" />
+                            &nbsp;
+                            PortFolio
+
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div className="w3-third w3-padding">
+                <div className="w3-padding">
 
-                    <h3>About</h3>
-
-                    <a href={"/about"} style={{ textDecoration: "none" }}>About Me</a>
-
-                    <span onClick={() => alert("Coming Soon")} className="w3-block" style={{ cursor: "pointer" }}>Portfolio</span>
+                    <p>&copy; Joshi's Blog 2021</p>
 
                 </div>
 
-            </div>
+            </footer>
+        );
+    }
+}
 
-            <p className="w3-small w3-padding-large">&copy; Copyright Title</p>
-
-        </div>
-    );
-};
+export default Footer;
