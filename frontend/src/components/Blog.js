@@ -1,68 +1,86 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
-class Blog extends Component {
-    state = {
-        posts: []
-    }
+import { useRouteMatch, Route, Switch, Link } from 'react-router-dom';
 
-    componentDidMount() {
-        axios.get("http://localhost:8000/blogs/")
-            .then(res => this.setState({ posts: res.data }));
-    }
+import BlogRender from './BlogRender';
+import Loading from './Loading';
 
-    render() {
-        const postsComponent = this.state.posts.map(data => {
-            return (
-                <div className="w3-padding w3-third" key={data.id}>
+function Blog() {
+    let { path, url } = useRouteMatch();
 
-                    <div className="w3-white turn-20">
+    const [posts, setposts] = useState([]);
+    const [loading, setloading] = useState(true);
 
-                        <a
-                            href={"/blog/" + data.slug}
-                            className="w3-card turn-20"
-                            style={{ textDecoration: "none" }}
-                        >
+    useEffect(() => {
+        async function fetchdata() {
+            const res = await axios.get("http://localhost:8000/api/blog/");
+            return res;
+        }
 
-                            <img src={"http://localhost:8000" + data.image} alt={data.image_alt} className="w3-image turn-top-20" />
+        return fetchdata().then(res => setposts(res.data), setloading(false));
+    }, []);
 
-                            <p className="w3-center bold w3-padding">{data.title}</p>
-
-                        </a>
-
-                    </div>
-
-                </div>
-            );
-        });
-
+    const postsComponent = posts.map(data => {
         return (
-            <div className="w3-animate-opacity">
+            <div className="w3-third w3-padding" key={data.id}>
 
-                <header className="w3-display-container w3-grey" style={{ height: "500px", width: "100%" }}>
+                <div className="w3-card-4 turn-10 color-4">
 
-                    <h1 className="w3-display-middle w3-text-white bold">
-                        Blog Page
-                        <hr className="w3-black w3-padding-small w3-border-black" />
-                    </h1>
+                    <Link to={`${url}` + data.slug + '/'} className="w3-hover-opacity" style={{ textDecoration: "none" }}>
 
-                </header>
+                        <img src={data.image} alt={data.alt_text} className="w3-image turn-top-10" />
 
-                <div className="w3-conatiner w3-padding-large w3-light-grey">
+                        <h4 className="w3-center w3-padding heavy">{data.title}</h4>
 
-                    <h2>All posts</h2>
+                    </Link>
 
-                    <div className="w3-row w3-padding">
-
-                        {postsComponent}
-
-                    </div>
                 </div>
 
             </div>
+
         );
-    }
+    });
+
+    const blog = (
+        <div className="w3-animate-opacity">
+
+            <header className="color-2 w3-display-container blog" style={{ width: "100%", height: "500px" }}>
+
+                <h1 className="w3-display-middle heading">
+                    Blog
+                    <hr className="color-1 w3-padding-small color-1-border" />
+                </h1>
+
+            </header>
+
+            <div className="w3-margin">
+
+                <div className="w3-card-4 color-3 w3-padding turn-10">
+
+                    <h3>All Posts</h3>
+
+                    <div className="w3-row">{postsComponent}</div>
+
+                </div>
+
+            </div>
+
+        </div>
+    );
+
+    return (
+        <Switch>
+
+            <Route exact path={path}>{loading ? <Loading /> : blog}</Route>
+
+            <Route path={`${path}:slug/`}>
+                <BlogRender />
+            </Route>
+
+        </Switch>
+    );
 }
 
 export default Blog;
