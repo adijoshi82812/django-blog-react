@@ -31,7 +31,7 @@ This website uses w3.css framework instead of high-end frameworks like bootstarp
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/adijoshi82812/django-blog-react.git
 ```
 
 ### Deploy the frontend app
