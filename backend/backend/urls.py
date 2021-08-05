@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
+from .views import index
 
 urlpatterns = [
+    path('', index, name='index'),
     path('api/blog/', include('blog.urls')),
     path('api/contact-page/', include('contact.urls')),
     path('api/fetch-quote/', include('dailyquote.urls')),
